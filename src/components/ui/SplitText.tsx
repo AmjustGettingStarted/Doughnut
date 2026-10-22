@@ -65,24 +65,35 @@ function ScrollLine({
   const dir = index % 2 === 0 ? -1 : 1;
   const shift = index * lineStagger;
   const travel = reduced ? 0 : distance;
-  const exit = leave ?? [1, 1.0001];
 
-  // In mount mode the entrance is a one-off animation; scroll owns only the exit.
-  const inputs = mount
-    ? [exit[0], exit[1]]
-    : [Math.min(range[0] + shift, 1), Math.min(range[1] + shift, 1), exit[0], exit[1]];
+  // Keyframes: [enter] in scroll mode, [leave] when provided. In mount mode
+  // the entrance is a one-off animation and scroll owns only the exit.
+  const inputs: number[] = [];
+  const opacityOut: number[] = [];
+  const xOut: number[] = [];
+  const filterOut: string[] = [];
+  if (!mount) {
+    inputs.push(Math.min(range[0] + shift, 0.999), Math.min(range[1] + shift, 1));
+    opacityOut.push(0, 1);
+    xOut.push(dir * travel, 0);
+    filterOut.push(WORD_BLUR, NO_BLUR);
+  }
+  if (leave) {
+    inputs.push(leave[0], leave[1]);
+    opacityOut.push(1, 0);
+    xOut.push(0, -dir * travel * 0.5);
+    filterOut.push(NO_BLUR, 'blur(6px)');
+  }
+  if (inputs.length === 0) {
+    inputs.push(0, 1);
+    opacityOut.push(1, 1);
+    xOut.push(0, 0);
+    filterOut.push(NO_BLUR, NO_BLUR);
+  }
 
-  const opacity = useTransform(progress, inputs, mount ? [1, 0] : [0, 1, 1, 0]);
-  const x = useTransform(
-    progress,
-    inputs,
-    mount ? [0, -dir * travel * 0.5] : [dir * travel, 0, 0, -dir * travel * 0.5],
-  );
-  const filter = useTransform(
-    progress,
-    inputs,
-    mount ? [NO_BLUR, 'blur(6px)'] : [WORD_BLUR, NO_BLUR, NO_BLUR, 'blur(6px)'],
-  );
+  const opacity = useTransform(progress, inputs, opacityOut);
+  const x = useTransform(progress, inputs, xOut);
+  const filter = useTransform(progress, inputs, filterOut);
 
   return (
     <motion.span
