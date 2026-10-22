@@ -1,3 +1,5 @@
+"use client";
+
 import {lazy, Suspense, useEffect, useState} from 'react';
 import {useUiStore} from '@/store/uiStore';
 

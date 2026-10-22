@@ -1,3 +1,5 @@
+"use client";
+
 import {AnimatePresence, motion} from 'motion/react';
 import {useUiStore} from '@/store/uiStore';
 import {EASE_SOFT} from '@/lib/motion';

@@ -1,3 +1,5 @@
+"use client";
+
 import {motion, useReducedMotion} from 'motion/react';
 import type {ReactNode} from 'react';
 import {EASE_EXPO} from '@/lib/motion';

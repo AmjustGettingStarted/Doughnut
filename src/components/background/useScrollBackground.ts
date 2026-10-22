@@ -1,3 +1,5 @@
+"use client";
+
 import {useEffect, type RefObject} from 'react';
 import {getRegisteredSections} from '@/hooks/useSectionProgress';
 import {clamp, lerp, smoothstep} from '@/lib/format';

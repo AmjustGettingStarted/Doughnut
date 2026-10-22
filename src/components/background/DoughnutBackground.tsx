@@ -1,3 +1,5 @@
+"use client";
+
 import {useRef, type CSSProperties} from 'react';
 import {useScrollBackground} from './useScrollBackground';
 

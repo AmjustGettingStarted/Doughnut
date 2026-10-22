@@ -4,21 +4,21 @@ A scroll-driven landing page with online ordering for a small-batch doughnut
 shop. The scroll-scrubbed doughnut clip is the hero of the whole site: every
 section owns one "beat" of the clip and its content animates in sync with it.
 
-Vite 8 · React 19 · TypeScript (strict) · Tailwind v4 · Motion · Lenis ·
-Zustand · react-hook-form · zod. No backend; payments are mocked.
+Next.js (App Router) · React 19 · TypeScript (strict) · Tailwind v4 · Motion ·
+Lenis · Zustand · react-hook-form · zod. No backend; payments are mocked.
 
 ## Run
 
 ```bash
 npm install
 npm run dev       # http://localhost:3000
-npm run build     # tsc --noEmit + production build into dist/
-npm run preview   # serve dist/
-npm run lint      # type-check only
+npm run build     # production build
+npm run start     # serve the production build
+npm run lint      # generate route types, then tsc --noEmit
 ```
 
-No environment variables are required. The background clip streams from a
-CDN and is buffered as a Blob before the loader dismisses.
+No environment variables are required. See `.env.example`. The background clip
+streams from a CDN and is buffered as a Blob before the loader dismisses.
 
 ## How the scroll story works
 
@@ -63,6 +63,8 @@ Beat map (clip time as a fraction of the 10 s shot):
 
 - `store/cartStore.ts` — Zustand store persisted to `localStorage`
   (`ring-theory-cart`): singles and boxes, quantities, subtotal, clear.
+  Hydration is skipped on the server and restored in `AppEffects` after mount
+  so a saved cart does not mismatch the server HTML.
 - `lib/order.ts` — `submitOrder()` is a mocked promise. The `TODO(payments)`
   comment marks where the real order API + payment gateway go; the UI only
   depends on the resolved `{orderId, eta}` shape.
@@ -71,17 +73,21 @@ Beat map (clip time as a fraction of the 10 s shot):
 ## File map
 
 ```
+app/
+  layout.tsx                      fonts, metadata, html/body, global css
+  page.tsx                        composes the page in scroll order
+  globals.css                     Tailwind v4 theme tokens, base styles, utilities
+  icon.svg                        favicon
 src/
-  App.tsx                         composes the page in scroll order
-  main.tsx                        React root
-  index.css                       Tailwind v4 theme tokens, base styles, utilities
   components/
     background/
       beats.ts                    section → clip-time slice + look
       useScrollBackground.ts      scroll-scrub engine (blob preload, eased seek)
       DoughnutBackground.tsx      fixed <video> stage, veil, grain
+      DoughnutBackgroundClient.tsx  client-only dynamic import (ssr: false)
     layout/
       Navbar.tsx  Footer.tsx  InfoBar.tsx  ScrollProgress.tsx  Loader.tsx
+      AppEffects.tsx              Lenis + cart rehydrate (client)
     sections/
       Hero.tsx                    pinned; mount-in headline, lagging CTA layer
       Craft.tsx                   pinned; horizontal scroll-jacked process strip

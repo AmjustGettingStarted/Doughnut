@@ -1,5 +1,7 @@
+"use client";
+
 import {create} from 'zustand';
-import {persist} from 'zustand/middleware';
+import {createJSONStorage, persist, type StateStorage} from 'zustand/middleware';
 import {getMenuItem, type MenuItem} from '@/data/menu';
 
 export const BOX_SIZES = [4, 6, 12] as const;
@@ -34,6 +36,18 @@ interface CartState {
 export function boxPrice(size: BoxSize, itemIds: readonly string[]): number {
   const sum = itemIds.reduce((acc, id) => acc + (getMenuItem(id)?.price ?? 0), 0);
   return Math.round(sum * (1 - BOX_DISCOUNT[size]));
+}
+
+const memoryStorage: StateStorage = {
+  getItem: () => null,
+  setItem: () => undefined,
+  removeItem: () => undefined,
+};
+
+/** localStorage on the client, an inert store during SSR. */
+function getCartStorage(): StateStorage {
+  if (typeof window === 'undefined') return memoryStorage;
+  return window.localStorage;
 }
 
 export const useCartStore = create<CartState>()(
@@ -77,6 +91,10 @@ export const useCartStore = create<CartState>()(
       name: 'ring-theory-cart',
       version: 1,
       partialize: (s) => ({lines: s.lines}),
+      // Don't read localStorage during SSR or the first client render. AppEffects
+      // calls rehydrate() after mount so the server HTML and hydration match.
+      skipHydration: true,
+      storage: createJSONStorage(getCartStorage),
     },
   ),
 );

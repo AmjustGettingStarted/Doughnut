@@ -11,7 +11,7 @@
   --color-berry-deep: #c92f58;
   --color-caramel: #c98a3a;
 
-  --font-sans: "Inter Tight", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-sans: var(--font-inter-tight), "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   --ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
