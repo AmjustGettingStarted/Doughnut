@@ -1,3 +1,5 @@
+"use client";
+
 import {useEffect, useRef} from 'react';
 import {useScroll, type MotionValue} from 'motion/react';
 import type {SectionId} from '@/components/background/beats';

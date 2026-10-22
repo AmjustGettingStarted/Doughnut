@@ -1,3 +1,5 @@
+"use client";
+
 import type {MotionValue} from 'motion/react';
 import {ParallaxLayer} from './ParallaxLayer';
 

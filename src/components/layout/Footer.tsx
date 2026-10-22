@@ -1,3 +1,5 @@
+"use client";
+
 import type {MouseEvent} from 'react';
 import {brand} from '@/data/brand';
 import {scrollToId} from '@/hooks/useLenis';

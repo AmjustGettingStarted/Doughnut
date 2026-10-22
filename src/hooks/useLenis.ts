@@ -1,3 +1,5 @@
+"use client";
+
 import Lenis from 'lenis';
 import {useEffect} from 'react';
 import {useReducedMotion} from 'motion/react';
@@ -6,6 +8,7 @@ let instance: Lenis | null = null;
 
 /** Scroll to an anchor id. Falls back to native scrolling when Lenis is disabled. */
 export function scrollToId(id: string, offset = 0): void {
+  if (typeof document === 'undefined' || typeof window === 'undefined') return;
   const target = document.getElementById(id);
   if (!target) return;
   if (instance) {
@@ -18,6 +21,7 @@ export function scrollToId(id: string, offset = 0): void {
 
 /** Pause/resume page scroll while a drawer or modal is open. */
 export function lockScroll(locked: boolean): void {
+  if (typeof document === 'undefined') return;
   if (instance) {
     if (locked) instance.stop();
     else instance.start();

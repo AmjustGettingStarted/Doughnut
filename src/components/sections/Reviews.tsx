@@ -1,3 +1,5 @@
+"use client";
+
 import {motion, useReducedMotion, type MotionValue} from 'motion/react';
 import {useProgressTransform} from '@/hooks/useProgressTransform';
 import {reviews, socialProof, type Review} from '@/data/reviews';

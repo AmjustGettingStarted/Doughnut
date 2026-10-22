@@ -1,3 +1,5 @@
+"use client";
+
 import {motion, useScroll} from 'motion/react';
 
 /** 2px page-progress meter along the top edge. */

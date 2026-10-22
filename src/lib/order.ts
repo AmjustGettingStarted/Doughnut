@@ -24,7 +24,7 @@ export interface OrderResult {
  */
 export function submitOrder(payload: OrderPayload): Promise<OrderResult> {
   return new Promise((resolve) => {
-    window.setTimeout(() => {
+    setTimeout(() => {
       const suffix = Math.random().toString(36).slice(2, 6).toUpperCase();
       resolve({
         orderId: `RT-${suffix}`,

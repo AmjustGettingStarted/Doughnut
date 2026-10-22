@@ -1,6 +1,7 @@
-import {DoughnutBackground} from '@/components/background/DoughnutBackground';
+import {DoughnutBackground} from '@/components/background/DoughnutBackgroundClient';
 import {CartDrawer} from '@/components/cart/CartDrawer';
 import {CheckoutLoader} from '@/components/cart/CheckoutLoader';
+import {AppEffects} from '@/components/layout/AppEffects';
 import {Footer} from '@/components/layout/Footer';
 import {InfoBar} from '@/components/layout/InfoBar';
 import {Loader} from '@/components/layout/Loader';
@@ -14,13 +15,11 @@ import {Hero} from '@/components/sections/Hero';
 import {MenuSection} from '@/components/sections/MenuSection';
 import {Reviews} from '@/components/sections/Reviews';
 import {Visit} from '@/components/sections/Visit';
-import {useLenis} from '@/hooks/useLenis';
 
-export default function App() {
-  useLenis();
-
+export default function Page() {
   return (
     <>
+      <AppEffects />
       <a
         href="#menu"
         className="sr-only z-[100] rounded-full bg-ink px-4 py-2 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"

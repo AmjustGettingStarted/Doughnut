@@ -1,3 +1,5 @@
+"use client";
+
 import {AnimatePresence, motion, useReducedMotion} from 'motion/react';
 import {useCallback, useEffect, useRef, useState, type ReactNode} from 'react';
 import {useForm, type FieldError, type UseFormRegisterReturn} from 'react-hook-form';
