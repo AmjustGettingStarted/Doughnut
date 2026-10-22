@@ -1,4 +1,5 @@
 import {motion, useReducedMotion, useTransform, type MotionValue} from 'motion/react';
+import {useProgressTransform} from '@/hooks/useProgressTransform';
 import {useEffect, useRef, useState} from 'react';
 import {useSectionProgress} from '@/hooks/useSectionProgress';
 import {ParallaxLayer} from '@/components/ui/ParallaxLayer';
@@ -76,11 +77,11 @@ export function Craft() {
     };
   }, []);
 
-  const x = useTransform(progress, [0.18, 0.92], [0, -travel]);
-  const headOpacity = useTransform(progress, [0.14, 0.24], [1, 0.18]);
-  const headScale = useTransform(progress, [0.14, 0.3], [1, 0.88]);
-  const stripOpacity = useTransform(progress, [0.1, 0.2, 0.94, 1], [0, 1, 1, 0]);
-  const railWidth = useTransform(progress, [0.18, 0.92], ['0%', '100%']);
+  const x = useProgressTransform(progress, [0.18, 0.92], [0, -travel]);
+  const headOpacity = useProgressTransform(progress, [0.14, 0.24], [1, 0.18]);
+  const headScale = useProgressTransform(progress, [0.14, 0.3], [1, 0.88]);
+  const stripOpacity = useProgressTransform(progress, [0.1, 0.2, 0.94, 1], [0, 1, 1, 0]);
+  const railWidth = useProgressTransform(progress, [0.18, 0.92], ['0%', '100%']);
   const counter = useTransform(progress, (p) => {
     const i = Math.min(STEPS.length, Math.max(1, Math.ceil(((p - 0.18) / 0.74) * STEPS.length)));
     return `0${i}`;
@@ -162,8 +163,8 @@ function StepCard({
   const reduced = useReducedMotion();
   // Alternate a gentle vertical drift so cards don't move as one slab.
   const dir = index % 2 === 0 ? 1 : -1;
-  const y = useTransform(progress, [0.18, 0.92], [dir * 18, -dir * 18]);
-  const rotate = useTransform(progress, [0.18, 0.92], [dir * 1.5, 0]);
+  const y = useProgressTransform(progress, [0.18, 0.92], [dir * 18, -dir * 18]);
+  const rotate = useProgressTransform(progress, [0.18, 0.92], [dir * 1.5, 0]);
 
   return (
     <motion.article

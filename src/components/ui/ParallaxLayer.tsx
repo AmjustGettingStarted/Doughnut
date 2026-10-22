@@ -1,4 +1,5 @@
-import {motion, useReducedMotion, useScroll, useTransform, type MotionValue} from 'motion/react';
+import {motion, useReducedMotion, useScroll, type MotionValue} from 'motion/react';
+import {useProgressTransform} from '@/hooks/useProgressTransform';
 import {useRef, type CSSProperties, type ReactNode} from 'react';
 import {FLOW_OFFSET} from '@/hooks/useSectionProgress';
 
@@ -41,8 +42,8 @@ export function ParallaxLayer({
 
   const travel = reduced ? 0 : range * speed;
   const sign = direction === 'up' || direction === 'left' ? -1 : 1;
-  const offset = useTransform(source, [0, 1], [-sign * travel, sign * travel]);
-  const rotate = useTransform(source, [0, 1], [0, reduced ? 0 : spin]);
+  const offset = useProgressTransform(source, [0, 1], [-sign * travel, sign * travel]);
+  const rotate = useProgressTransform(source, [0, 1], [0, reduced ? 0 : spin]);
   const horizontal = direction === 'left' || direction === 'right';
 
   return (

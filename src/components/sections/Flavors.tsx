@@ -1,4 +1,5 @@
-import {AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useTransform} from 'motion/react';
+import {AnimatePresence, motion, useMotionValueEvent, useReducedMotion} from 'motion/react';
+import {useProgressTransform} from '@/hooks/useProgressTransform';
 import {useState} from 'react';
 import {signatureFlavors} from '@/data/menu';
 import {useCartStore} from '@/store/cartStore';
@@ -35,8 +36,8 @@ export function Flavors() {
     if (next !== index) setIndex(next);
   });
 
-  const stageOpacity = useTransform(progress, [0.12, 0.2, 0.96, 1], [0, 1, 1, 0]);
-  const stageY = useTransform(progress, [0.12, 0.2], [reduced ? 0 : 40, 0]);
+  const stageOpacity = useProgressTransform(progress, [0.12, 0.2, 0.96, 1], [0, 1, 1, 0]);
+  const stageY = useProgressTransform(progress, [0.12, 0.2], [reduced ? 0 : 40, 0]);
   const flavor = signatureFlavors[index] ?? signatureFlavors[0]!;
   const dir = index % 2 === 0 ? -1 : 1;
 

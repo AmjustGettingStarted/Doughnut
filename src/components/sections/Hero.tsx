@@ -1,4 +1,5 @@
-import {motion, useReducedMotion, useTransform} from 'motion/react';
+import {motion, useReducedMotion} from 'motion/react';
+import {useProgressTransform} from '@/hooks/useProgressTransform';
 import {brand} from '@/data/brand';
 import {scrollToId} from '@/hooks/useLenis';
 import {useSectionProgress} from '@/hooks/useSectionProgress';
@@ -11,11 +12,11 @@ export function Hero() {
   const reduced = useReducedMotion();
 
   // Lagging layer: subtext + CTAs sit on a slower curve than the headline.
-  const lagOpacity = useTransform(progress, [0, 0.08, 0.55, 0.75], [1, 1, 1, 0]);
-  const lagY = useTransform(progress, [0.15, 0.8], [0, reduced ? 0 : -70]);
-  const eyebrowY = useTransform(progress, [0, 0.8], [0, reduced ? 0 : -40]);
-  const eyebrowOpacity = useTransform(progress, [0.4, 0.65], [1, 0]);
-  const hintOpacity = useTransform(progress, [0, 0.12], [1, 0]);
+  const lagOpacity = useProgressTransform(progress, [0, 0.08, 0.55, 0.75], [1, 1, 1, 0]);
+  const lagY = useProgressTransform(progress, [0.15, 0.8], [0, reduced ? 0 : -70]);
+  const eyebrowY = useProgressTransform(progress, [0, 0.8], [0, reduced ? 0 : -40]);
+  const eyebrowOpacity = useProgressTransform(progress, [0.4, 0.65], [1, 0]);
+  const hintOpacity = useProgressTransform(progress, [0, 0.12], [1, 0]);
 
   return (
     <section id="hero" ref={ref} className="relative h-[220vh]" aria-labelledby="hero-title">

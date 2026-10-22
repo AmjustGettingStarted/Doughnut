@@ -1,4 +1,5 @@
-import {motion, useReducedMotion, useTransform, type MotionValue, type Variants} from 'motion/react';
+import {motion, useReducedMotion, type MotionValue, type Variants} from 'motion/react';
+import {useProgressTransform} from '@/hooks/useProgressTransform';
 import {createElement, type ReactNode} from 'react';
 import {EASE_EXPO} from '@/lib/motion';
 
@@ -91,9 +92,9 @@ function ScrollLine({
     filterOut.push(NO_BLUR, NO_BLUR);
   }
 
-  const opacity = useTransform(progress, inputs, opacityOut);
-  const x = useTransform(progress, inputs, xOut);
-  const filter = useTransform(progress, inputs, filterOut);
+  const opacity = useProgressTransform(progress, inputs, opacityOut);
+  const x = useProgressTransform(progress, inputs, xOut);
+  const filter = useProgressTransform(progress, inputs, filterOut);
 
   return (
     <motion.span
