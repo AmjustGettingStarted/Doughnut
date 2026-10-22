@@ -1,1 +1,128 @@
 @import "tailwindcss";
+
+@theme {
+  --color-cream: #f2f0ec;
+  --color-cream-deep: #e9e5de;
+  --color-ink: #0d0c0b;
+  --color-ink-soft: rgba(13, 12, 11, 0.64);
+  --color-ink-faint: rgba(13, 12, 11, 0.42);
+  --color-rule: rgba(13, 12, 11, 0.16);
+  --color-berry: #e5456e;
+  --color-berry-deep: #c92f58;
+  --color-caramel: #c98a3a;
+
+  --font-sans: "Inter Tight", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --text-display: clamp(2.6rem, 7.4vw, 7rem);
+  --text-display--line-height: 0.96;
+  --text-display--letter-spacing: -0.04em;
+  --text-title: clamp(2rem, 4.6vw, 4rem);
+  --text-title--line-height: 1;
+  --text-title--letter-spacing: -0.035em;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: auto;
+  }
+
+  body {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--color-berry);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  button {
+    cursor: pointer;
+    font: inherit;
+  }
+
+  /* Lenis */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+}
+
+@utility eyebrow {
+  font-size: 12.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+}
+
+@utility grain {
+  position: absolute;
+  inset: -50%;
+  opacity: 0.13;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='.5'/></svg>");
+}
+
+@utility veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(242, 240, 236, 0.62) 0%, rgba(242, 240, 236, 0.12) 22%, rgba(242, 240, 236, 0.12) 78%, rgba(242, 240, 236, 0.66) 100%),
+    radial-gradient(100% 80% at 50% 48%, rgba(242, 240, 236, 0) 0%, rgba(242, 240, 236, 0.34) 100%),
+    rgba(242, 240, 236, 0.2);
+
+  @media (max-width: 900px) {
+    background:
+      linear-gradient(to bottom, rgba(242, 240, 236, 0.72) 0%, rgba(242, 240, 236, 0.18) 24%, rgba(242, 240, 236, 0.18) 76%, rgba(242, 240, 236, 0.74) 100%),
+      radial-gradient(100% 80% at 50% 48%, rgba(242, 240, 236, 0) 0%, rgba(242, 240, 236, 0.4) 100%),
+      rgba(242, 240, 236, 0.24);
+  }
+}
+
+@utility glass {
+  background: rgba(242, 240, 236, 0.72);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  border: 1px solid rgba(13, 12, 11, 0.08);
+}
+
+@utility safe-top {
+  padding-top: max(14px, calc(env(safe-area-inset-top, 0px) + 12px));
+}
+
+@utility safe-bottom {
+  padding-bottom: max(14px, calc(env(safe-area-inset-bottom, 0px) + 12px));
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
