@@ -1,3 +1,5 @@
+"use client";
+
 import {AnimatePresence, motion, useMotionValueEvent, useReducedMotion} from 'motion/react';
 import {useProgressTransform} from '@/hooks/useProgressTransform';
 import {useState} from 'react';

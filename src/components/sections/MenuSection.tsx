@@ -1,3 +1,5 @@
+"use client";
+
 import {AnimatePresence, LayoutGroup, motion, useReducedMotion} from 'motion/react';
 import {useState} from 'react';
 import {CATEGORIES, menu, type Category, type MenuItem} from '@/data/menu';

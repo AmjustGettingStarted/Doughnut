@@ -1,3 +1,5 @@
+"use client";
+
 import {motion, useReducedMotion, useScroll, type MotionValue} from 'motion/react';
 import {useProgressTransform} from '@/hooks/useProgressTransform';
 import {useRef, type CSSProperties, type ReactNode} from 'react';

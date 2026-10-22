@@ -1,3 +1,5 @@
+"use client";
+
 import {AnimatePresence, LayoutGroup, motion, useAnimate, useReducedMotion} from 'motion/react';
 import {useLayoutEffect, useState, type MouseEvent} from 'react';
 import {menu, getMenuItem} from '@/data/menu';

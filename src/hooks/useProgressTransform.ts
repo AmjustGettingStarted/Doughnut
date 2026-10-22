@@ -1,3 +1,5 @@
+"use client";
+
 import {useTransform, type MotionValue} from 'motion/react';
 
 /**

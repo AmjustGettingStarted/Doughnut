@@ -1,3 +1,5 @@
+"use client";
+
 import {motion, useScroll} from 'motion/react';
 import {useProgressTransform} from '@/hooks/useProgressTransform';
 import {brand} from '@/data/brand';
