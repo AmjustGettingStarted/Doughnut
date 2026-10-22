@@ -8,7 +8,7 @@ import {BEATS, IDLE_LOOK, type BackgroundLook, type SectionId} from './beats';
  * 1920x1080, 10.04 s, 241 frames, all-intra. Every frame is a keyframe, which
  * is why a scroll scrub can land on an exact frame without inter-frame decode lag.
  */
-export const VIDEO_URL =
+const VIDEO_URL =
   'https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/45567745-d826-44a2-a5ce-7ef670944e60.mp4';
 
 const SEEK_EASE = 0.115; // easing factor from the original engine — do not change

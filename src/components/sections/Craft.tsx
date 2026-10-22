@@ -123,7 +123,8 @@ export function Craft() {
         </motion.div>
 
         <motion.div style={{opacity: stripOpacity}} className="relative mt-auto mb-24 sm:mb-28">
-          <div className="overflow-hidden">
+          {/* Under reduced motion the strip is a plain swipeable row instead of scroll-jacked. */}
+          <div className={reduced ? 'no-scrollbar overflow-x-auto' : 'overflow-hidden'}>
             <motion.div
               ref={trackRef}
               style={{x: reduced ? 0 : x}}

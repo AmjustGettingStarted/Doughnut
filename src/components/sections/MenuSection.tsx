@@ -44,7 +44,7 @@ export function MenuSection() {
 
         <LayoutGroup id="menu-filters">
           <div
-            role="tablist"
+            role="group"
             aria-label="Filter by category"
             className="no-scrollbar -mx-5 mt-10 flex gap-2 overflow-x-auto px-5 pb-1 sm:mx-0 sm:flex-wrap sm:px-0"
           >
@@ -53,9 +53,8 @@ export function MenuSection() {
               return (
                 <button
                   key={f}
-                  role="tab"
                   type="button"
-                  aria-selected={active}
+                  aria-pressed={active}
                   onClick={() => setFilter(f)}
                   className={`relative shrink-0 rounded-full px-4 py-2 text-[13.5px] tracking-[-0.005em] transition-colors duration-300 ${
                     active ? 'text-white' : 'text-ink hover:bg-ink/6'

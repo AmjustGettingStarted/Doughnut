@@ -159,7 +159,7 @@ export function CheckoutModal() {
             aria-labelledby="checkout-title"
             data-lenis-prevent
             className="relative flex max-h-[94dvh] w-full max-w-3xl flex-col overflow-hidden rounded-t-[28px] bg-cream shadow-[0_40px_120px_-30px_rgba(13,12,11,.6)] sm:rounded-[28px]"
-            variants={modalVariants}
+            variants={reduced ? backdropVariants : modalVariants}
             initial="hidden"
             animate="show"
             exit="exit"

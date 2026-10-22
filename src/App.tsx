@@ -1,6 +1,6 @@
 import {DoughnutBackground} from '@/components/background/DoughnutBackground';
 import {CartDrawer} from '@/components/cart/CartDrawer';
-import {CheckoutModal} from '@/components/cart/CheckoutModal';
+import {CheckoutLoader} from '@/components/cart/CheckoutLoader';
 import {Footer} from '@/components/layout/Footer';
 import {InfoBar} from '@/components/layout/InfoBar';
 import {Loader} from '@/components/layout/Loader';
@@ -21,6 +21,12 @@ export default function App() {
 
   return (
     <>
+      <a
+        href="#menu"
+        className="sr-only z-[100] rounded-full bg-ink px-4 py-2 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+      >
+        Skip to menu
+      </a>
       <Loader />
       <DoughnutBackground />
       <ScrollProgress />
@@ -38,7 +44,7 @@ export default function App() {
       <Footer />
       <InfoBar />
       <CartDrawer />
-      <CheckoutModal />
+      <CheckoutLoader />
     </>
   );
 }

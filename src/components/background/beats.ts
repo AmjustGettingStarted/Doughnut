@@ -14,18 +14,7 @@
  * dim). Scroll progress inside the section is mapped linearly onto `from..to`,
  * so the clip can run backwards for a beat (Craft rewinds into the hole).
  */
-export const SECTION_IDS = [
-  'hero',
-  'craft',
-  'flavors',
-  'menu',
-  'box',
-  'reviews',
-  'visit',
-  'final',
-] as const;
-
-export type SectionId = (typeof SECTION_IDS)[number];
+export type SectionId = 'hero' | 'craft' | 'flavors' | 'menu' | 'box' | 'reviews' | 'visit' | 'final';
 
 export interface BackgroundLook {
   scale: number;

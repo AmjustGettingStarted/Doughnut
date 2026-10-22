@@ -10,6 +10,7 @@ import {selectCount, selectSubtotal, useCartStore, type CartLine} from '@/store/
 import {useUiStore} from '@/store/uiStore';
 import {Button} from '@/components/ui/Button';
 import {DoughnutArt} from '@/components/ui/DoughnutArt';
+import {preloadCheckout} from './CheckoutLoader';
 
 export function CartDrawer() {
   const open = useUiStore((s) => s.cartOpen);
@@ -25,6 +26,7 @@ export function CartDrawer() {
   useFocusTrap(panelRef, open, closeCart);
   useEffect(() => {
     lockScroll(open);
+    if (open) preloadCheckout();
     return () => lockScroll(false);
   }, [open]);
 

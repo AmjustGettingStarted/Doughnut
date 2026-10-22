@@ -4,10 +4,6 @@ import {useReducedMotion} from 'motion/react';
 
 let instance: Lenis | null = null;
 
-export function getLenis(): Lenis | null {
-  return instance;
-}
-
 /** Scroll to an anchor id. Falls back to native scrolling when Lenis is disabled. */
 export function scrollToId(id: string, offset = 0): void {
   const target = document.getElementById(id);

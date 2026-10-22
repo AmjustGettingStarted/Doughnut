@@ -20,7 +20,3 @@ export function smoothstep(t: number): number {
   const x = clamp(t, 0, 1);
   return x * x * (3 - 2 * x);
 }
-
-export function pad2(n: number): string {
-  return n.toString().padStart(2, '0');
-}

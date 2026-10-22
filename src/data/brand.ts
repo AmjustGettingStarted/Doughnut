@@ -1,6 +1,5 @@
 export const brand = {
   name: 'Ring Theory',
-  shortName: 'Ring Theory',
   tagline: 'Baked at four. Boxed by seven.',
   description:
     'Small-batch doughnuts, hand-glazed every morning in a tiny kitchen off Lavelle Road. We fry at four, glaze at six and the first boxes leave at seven.',
@@ -42,5 +41,3 @@ export const brand = {
     {label: 'Visit', href: '#visit'},
   ],
 } as const;
-
-export type Brand = typeof brand;
