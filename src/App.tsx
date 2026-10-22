@@ -1,11 +1,14 @@
 import {DoughnutBackground} from '@/components/background/DoughnutBackground';
+import {CartDrawer} from '@/components/cart/CartDrawer';
 import {InfoBar} from '@/components/layout/InfoBar';
 import {Loader} from '@/components/layout/Loader';
 import {Navbar} from '@/components/layout/Navbar';
 import {ScrollProgress} from '@/components/layout/ScrollProgress';
+import {BoxBuilder} from '@/components/sections/BoxBuilder';
 import {Craft} from '@/components/sections/Craft';
 import {Flavors} from '@/components/sections/Flavors';
 import {Hero} from '@/components/sections/Hero';
+import {MenuSection} from '@/components/sections/MenuSection';
 import {useLenis} from '@/hooks/useLenis';
 
 export default function App() {
@@ -21,8 +24,11 @@ export default function App() {
         <Hero />
         <Craft />
         <Flavors />
+        <MenuSection />
+        <BoxBuilder />
       </main>
       <InfoBar />
+      <CartDrawer />
     </>
   );
 }

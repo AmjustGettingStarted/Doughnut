@@ -1,7 +1,8 @@
 import {AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useTransform} from 'motion/react';
 import {useState} from 'react';
 import {signatureFlavors} from '@/data/menu';
-import {scrollToId} from '@/hooks/useLenis';
+import {useCartStore} from '@/store/cartStore';
+import {useUiStore} from '@/store/uiStore';
 import {useSectionProgress} from '@/hooks/useSectionProgress';
 import {formatINR} from '@/lib/format';
 import {EASE_EXPO, SPRING_SOFT} from '@/lib/motion';
@@ -27,6 +28,8 @@ export function Flavors() {
   const {ref, progress} = useSectionProgress<HTMLElement>('flavors');
   const reduced = useReducedMotion();
   const [index, setIndex] = useState(0);
+  const add = useCartStore((s) => s.add);
+  const openCart = useUiStore((s) => s.openCart);
   useMotionValueEvent(progress, 'change', (p) => {
     const next = indexFor(p);
     if (next !== index) setIndex(next);
@@ -144,8 +147,14 @@ export function Flavors() {
                 <span className="text-[clamp(1.4rem,2.4vw,1.9rem)] font-medium tracking-[-0.03em] text-berry tabular-nums">
                   {formatINR(flavor.price)}
                 </span>
-                <Button variant="ink" onClick={() => scrollToId('menu')}>
-                  Order this one
+                <Button
+                  variant="ink"
+                  onClick={() => {
+                    add(flavor);
+                    openCart();
+                  }}
+                >
+                  Add to box
                 </Button>
               </motion.div>
             </div>

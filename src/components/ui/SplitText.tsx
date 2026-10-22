@@ -1,4 +1,4 @@
-import {motion, useReducedMotion, useTransform, type MotionValue} from 'motion/react';
+import {motion, useReducedMotion, useTransform, type MotionValue, type Variants} from 'motion/react';
 import {createElement, type ReactNode} from 'react';
 import {EASE_EXPO} from '@/lib/motion';
 
@@ -152,30 +152,35 @@ function ViewLine({
 }) {
   const dir = index % 2 === 0 ? -1 : 1;
   const words = text.split(' ');
+  // One viewport observer per line; words are orchestrated through variants so a
+  // word translated off the edge can never block its own entrance.
+  const lineVariants: Variants = {
+    hidden: {},
+    show: {transition: {staggerChildren: wordStagger, delayChildren: delay + index * 0.14}},
+  };
+  const wordVariants: Variants = {
+    hidden: {opacity: 0, x: reduced ? 0 : dir * distance, filter: reduced ? NO_BLUR : WORD_BLUR},
+    show: {opacity: 1, x: 0, filter: NO_BLUR, transition: {duration: reduced ? 0.4 : 0.9, ease: EASE_EXPO}},
+  };
   return (
-    <span className={`block ${className ?? ''}`}>
+    <motion.span
+      className={`block ${className ?? ''}`}
+      variants={lineVariants}
+      initial="hidden"
+      whileInView="show"
+      viewport={{once, amount: 0.5}}
+    >
       {words.map((word, i) => {
         const clean = word.replace(/[^\p{L}\p{N}&]/gu, '').toLowerCase();
         const isAccent = accent.some((a) => a.toLowerCase() === clean);
         return (
-          <motion.span
-            key={`${word}-${i}`}
-            className="inline-block will-change-[transform,opacity]"
-            initial={{opacity: 0, x: reduced ? 0 : dir * distance, filter: reduced ? NO_BLUR : WORD_BLUR}}
-            whileInView={{opacity: 1, x: 0, filter: NO_BLUR}}
-            viewport={{once, amount: 0.6}}
-            transition={{
-              duration: reduced ? 0.4 : 0.9,
-              delay: delay + index * 0.14 + i * wordStagger,
-              ease: EASE_EXPO,
-            }}
-          >
+          <motion.span key={`${word}-${i}`} className="inline-block will-change-[transform,opacity]" variants={wordVariants}>
             <Word accent={isAccent}>{word}</Word>
             {i < words.length - 1 ? '\u00A0' : ''}
           </motion.span>
         );
       })}
-    </span>
+    </motion.span>
   );
 }
 

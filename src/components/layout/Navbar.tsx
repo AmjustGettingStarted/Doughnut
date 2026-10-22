@@ -2,6 +2,7 @@ import type {MouseEvent} from 'react';
 import {brand} from '@/data/brand';
 import {scrollToId} from '@/hooks/useLenis';
 import {Button} from '@/components/ui/Button';
+import {CartButton} from '@/components/cart/CartButton';
 
 function handleAnchor(e: MouseEvent<HTMLAnchorElement>, href: string) {
   if (!href.startsWith('#')) return;
@@ -59,9 +60,12 @@ export function Navbar() {
             </li>
           ))}
         </ul>
-        <Button href="#menu" size="sm" onClick={(e) => handleAnchor(e, '#menu')} className="sm:h-10 sm:px-5">
-          Order now
-        </Button>
+        <span className="hidden sm:block">
+          <Button href="#menu" size="sm" onClick={(e) => handleAnchor(e, '#menu')} className="sm:h-10 sm:px-5">
+            Order now
+          </Button>
+        </span>
+        <CartButton />
       </nav>
     </header>
   );
